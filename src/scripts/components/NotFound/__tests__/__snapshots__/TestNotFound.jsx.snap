@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound /> renders correctly 1`] = `
+<article
+  className="main"
+>
+  <header>
+    <h1>
+      404.
+    </h1>
+  </header>
+  <p>
+    <Link
+      replace={false}
+      to="/"
+    >
+      Take me home.
+    </Link>
+  </p>
+</article>
+`;

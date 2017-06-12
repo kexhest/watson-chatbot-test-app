@@ -1,0 +1,14 @@
+@mixin font-face($font-family, $file-path, $font-weight: 'normal', $font-style: 'normal') {
+  @font-face {
+    font-family: $font-family;
+    src: url('#{$file-path}.woff2') format('woff2'), url('#{$file-path}.woff') format('woff');
+
+    @if $font-weight != '' {
+      font-weight: $font-weight;
+    }
+
+    @if $font-style != '' {
+      font-style: $font-style;
+    }
+  }
+}

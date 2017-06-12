@@ -1,0 +1,34 @@
+:root { font: #{$root-font-size}/#{$root-line-height} $root-font-family; }
+
+body {
+  color: $color-font-base;
+}
+
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+p {}
+
+address {}
+
+a {
+  color: $color-font-base;
+
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+    color: $color-font-base;
+  }
+}
+
+b,
+strong { font-weight: 700; }
+
+i,
+em { font-style: italic; }

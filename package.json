@@ -1,0 +1,138 @@
+{
+  "name": "watson-chatbot-test-app",
+  "author": "Magnus Bergman <magnus@apt.no>",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "7.7.4",
+    "npm": "4.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "magnus-bergman/watson-chatbot-test-app"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "cross-env NODE_ENV=test jest",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.{js,jsx}' 'flow/**/*.js' 'jest/**/*.js'",
+    "clean": "rimraf dist",
+    "start": "cross-env NODE_ENV=development node app",
+    "dev": "npm run start",
+    "prebuild": "npm run clean -s",
+    "build": "cross-env NODE_ENV=production webpack -p --colors --progress",
+    "prebuild:stats": "npm run clean -s",
+    "build:stats": "cross-env NODE_ENV=production webpack -p --colors --progress --json > stats.json"
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      ".*": "<rootDir>/jest/preprocessor.js"
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
+    "roots": [
+      "<rootDir>/src/scripts"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$",
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^.+\\.(yml|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/fileStub.js"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "git add"
+    ]
+  },
+  "prettierOptions": {
+    "bracketSpacing": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.17.2",
+    "classnames": "^2.2.5",
+    "compression": "^1.6.2",
+    "copy-webpack-plugin": "^4.0.1",
+    "cors": "^2.8.3",
+    "counterpart": "^0.18.0",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.4",
+    "cssnano": "^3.10.0",
+    "custom-event-polyfill": "^0.3.0",
+    "dotenv": "^4.0.0",
+    "enzyme": "^2.8.2",
+    "es6-promise": "^4.1.0",
+    "escape-string-regexp": "^1.0.5",
+    "eslint": "^3.19.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "exports-loader": "^0.6.4",
+    "express": "^4.15.3",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.28.0",
+    "identity-obj-proxy": "^3.0.0",
+    "imports-loader": "^0.7.1",
+    "jest-cli": "^20.0.4",
+    "jest-serializer-enzyme": "^1.0.0",
+    "jest-webpack-alias": "^3.3.3",
+    "json-loader": "^0.5.4",
+    "jszip": "^3.1.3",
+    "left-pad": "^1.1.3",
+    "lodash": "^4.17.4",
+    "morgan": "^1.8.2",
+    "multer": "^1.3.0",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.0.2",
+    "postcss": "^6.0.1",
+    "postcss-loader": "^2.0.5",
+    "prettier": "^1.4.4",
+    "query-string": "^4.3.4",
+    "raw-loader": "^0.5.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-hot-loader": "next",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-test-renderer": "^15.5.4",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.1",
+    "sanitize.css": "^5.0.0",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.2",
+    "uglify-js": "^3.0.15",
+    "url-loader": "^0.5.8",
+    "url-search-params-polyfill": "^1.3.0",
+    "watson-developer-cloud": "^2.32.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-manifest-plugin": "^1.1.0",
+    "yaml-loader": "^0.4.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,12 @@
+[ignore]
+
+[include]
+
+[libs]
+# webpack interface for module.hot and module.dispose
+flow/interfaces
+
+[options]
+# webpack loaders
+module.name_mapper='.*\.s?css$' -> '<PROJECT_ROOT>/flow/css-stub.js'
+module.name_mapper='.*\.\(svg\|png\|jpg\|gif\|yml\)$' -> '<PROJECT_ROOT>/flow/file-stub.js'

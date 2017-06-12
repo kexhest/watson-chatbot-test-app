@@ -1,0 +1,26 @@
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+
+  background-color: $color-bg;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus { outline: 0; }
+}
+
+button {
+  font-family: $root-font-family;
+
+  cursor: pointer;
+
+  &:disabled { cursor: auto; }
+}
+
+a {
+  &:hover,
+  &:active { color: currentColor; }
+}

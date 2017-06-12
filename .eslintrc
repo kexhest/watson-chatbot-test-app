@@ -1,0 +1,43 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "flowtype"
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "settings": {
+    "import/ignore": [
+      "node_modules"
+    ],
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      },
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "client/src/scripts",
+          "client/src/styles",
+          "client/src/fonts",
+          "client/src/media",
+          "client/src/data"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "no-console": "warn"
+  }
+}

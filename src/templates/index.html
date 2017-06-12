@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Bluemix Workshop</title>
+
+  <meta name="description" content="Bluemix Workshop">
+
+  <% htmlWebpackPlugin.files.css.forEach(function (filePath) { %>
+    <style>
+      <%=compilation.assets[filePath.substr(htmlWebpackPlugin.files.publicPath.length)].source() %>
+    </style>
+    <% }) %>
+      <script>
+        window.__PRELOADED_STATE__ = <%= JSON.stringify({ messages: { error: null, data: [{ id: 1, sender: 'bot', text: 'Welcome, human.' }] } }) %>;
+      </script>
+
+      <body class="no-touch">
+        <div id="root"></div>
+
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Fetch,Promise,Map,WeakMap,Object.keys,Object.assign"></script>
+        <% htmlWebpackPlugin.files.js.forEach(function (filePath) { %>
+          <script src="<%= filePath %>" defer></script>
+          <% }) %>
