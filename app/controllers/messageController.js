@@ -64,7 +64,7 @@ const create = (req, res) => {
             sender: 'bot',
             text: response.output.text[0],
           },
-          tones,
+          tones: Object.keys(tones).map(key => tones[key]),
           context: response.context,
         });
       });

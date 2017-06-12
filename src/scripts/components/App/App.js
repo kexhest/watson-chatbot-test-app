@@ -15,14 +15,33 @@ import {
 } from '../../actions/messages';
 
 /**
+ * Declare Message type for flow.
+ */
+type Message = {
+  id: string,
+  sender: string,
+  text: string,
+  failed: boolean,
+};
+
+/**
+ * Declare Tone type for flow.
+ */
+type Tone = {
+  tone_id: string,
+  tone_name: string,
+  score: number,
+};
+
+/**
  * Declare Props type for flow.
  */
 type Props = {
   location: Object,
   error: Object,
   context: Object,
-  tones: Object,
-  messages: Array,
+  tones: Array<Tone>,
+  messages: Array<Message>,
   sendMessage: Function,
   clearError: Function,
 };
@@ -53,7 +72,7 @@ export class App extends Component {
     location: {},
     error: {},
     context: {},
-    tones: {},
+    tones: [],
     messages: [],
     sendMessage: () => {},
     clearError: () => {},
@@ -137,9 +156,9 @@ export class App extends Component {
               )}
           </ul>
           <ul>
-            {Object.keys(tones).map(key =>
-              <li key={tones[key].tone_id}>
-                {tones[key].tone_name}: {Math.round(tones[key].score * 100)}
+            {tones.map(({ tone_id, tone_name, score }: Tone) =>
+              <li key={tone_id}>
+                {tone_name}: {Math.round(score * 100)}
               </li>
             )}
           </ul>
@@ -147,15 +166,15 @@ export class App extends Component {
         <div className={styles.chatBox}>
           <ul>
             {messages &&
-              messages.map(message =>
+              messages.map(({ id, sender, text, failed }: Message) =>
                 <li
-                  key={message.id}
+                  key={id}
                   className={classNames({
-                    [styles.userMessage]: message.sender === 'me',
-                    [styles.failed]: message.failed === true,
+                    [styles.userMessage]: sender === 'me',
+                    [styles.failed]: failed === true,
                   })}
                 >
-                  {message.text}
+                  {text}
                 </li>
               )}
           </ul>

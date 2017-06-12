@@ -43,10 +43,7 @@ export default function(state = initialState, { type, payload }) {
           ...state.context,
           ...payload.context,
         },
-        tones: {
-          ...state.tones,
-          ...payload.tones,
-        },
+        tones: payload.tones || [],
         data: [...state.data, payload.data],
       };
 
