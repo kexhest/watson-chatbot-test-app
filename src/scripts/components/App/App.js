@@ -165,7 +165,7 @@ export class App extends Component {
    *
    * @param {Object} props
    */
-  componentWillReceiveProps({ messages }: Props) {
+  componentWillReceiveProps({ messages, context }: Props) {
     const latestMessage = messages.length > 0
       ? messages[messages.length - 1]
       : {};
@@ -184,6 +184,14 @@ export class App extends Component {
       this.speech.text = latestMessage.text;
 
       synth.speak(this.speech);
+    }
+
+    if (context.musikk !== this.props.context.musikk) {
+      if (context.musikk === true) {
+        console.log('PLAY MUSIC');
+      } else {
+        console.log('STOP MUSIC');
+      }
     }
   }
 
