@@ -47,40 +47,41 @@ module.exports = {
   module: {
     rules: [
       {
-        exclude: [/\.html$/, /\.jsx?$/, /\.(css|scss)$/, /\.json$/, /\.yml$/],
+        exclude: [
+          /\.json$/,
+          /\.jsx?$/,
+          /\.html$/,
+          /\.(css|scss)$/,
+          /\.svg$/,
+          /\.yml$/,
+        ],
         use: {
-          loader: require.resolve('url-loader'),
+          loader: 'url-loader',
           options: {
             limit: 10000,
-            name: '[name].[ext]',
+            name: 'media/[name].[ext]',
           },
         },
       },
       {
         test: /\.json$/,
-        use: { loader: require.resolve('json-loader') },
+        use: { loader: 'json-loader' },
         exclude: /(node_modules)/,
       },
       {
         test: /\.jsx?$/,
         use: [
-          {
-            loader: require.resolve('react-hot-loader/webpack'),
-          },
-          {
-            loader: require.resolve('babel-loader'),
-          },
+          { loader: 'react-hot-loader/webpack' },
+          { loader: 'babel-loader' },
         ],
         exclude: /(node_modules)/,
       },
       {
         test: /\.s?css$/,
         use: [
+          { loader: 'style-loader' },
           {
-            loader: require.resolve('style-loader'),
-          },
-          {
-            loader: require.resolve('css-loader'),
+            loader: 'css-loader',
             options: {
               modules: true,
               camelCase: true,
@@ -88,7 +89,7 @@ module.exports = {
             },
           },
           {
-            loader: require.resolve('postcss-loader'),
+            loader: 'postcss-loader',
             options: {
               plugins: [
                 require('autoprefixer')({
@@ -98,7 +99,7 @@ module.exports = {
             },
           },
           {
-            loader: require.resolve('sass-loader'),
+            loader: 'sass-loader',
             options: {
               outputStyle: 'expanded',
               includePaths: [
@@ -110,11 +111,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.svg$/,
+        use: [{ loader: 'babel-loader' }, { loader: 'react-svg-loader' }],
+        exclude: /(node_modules)/,
+      },
+      {
         test: /\.yml$/,
-        use: [
-          { loader: require.resolve('json-loader') },
-          { loader: require.resolve('yaml-loader') },
-        ],
+        use: [{ loader: 'json-loader' }, { loader: 'yaml-loader' }],
         exclude: /(node_modules)/,
       },
     ],

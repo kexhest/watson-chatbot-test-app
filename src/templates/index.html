@@ -16,13 +16,13 @@
     </style>
     <% }) %>
       <script>
-        window.__PRELOADED_STATE__ = <%= JSON.stringify({ messages: { error: null, data: [{ id: 1, sender: 'bot', text: 'Welcome, human.' }] } }) %>;
+        window.__PRELOADED_STATE__ = <%= JSON.stringify({ messages: { error: null, data: [{ id: 1, sender: 'bot', text: 'Hei, jeg heter Nora. Kan jeg hjelpe deg med noe?' }] } }) %>;
       </script>
 
       <body class="no-touch">
         <div id="root"></div>
 
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Fetch,Promise,Map,WeakMap,Object.keys,Object.assign"></script>
+        <!--<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Fetch,Promise,Map,WeakMap,Object.keys,Object.assign"></script>-->
         <% htmlWebpackPlugin.files.js.forEach(function (filePath) { %>
           <script src="<%= filePath %>" defer></script>
           <% }) %>

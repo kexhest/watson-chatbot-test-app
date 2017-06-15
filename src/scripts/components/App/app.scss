@@ -116,6 +116,42 @@
   }
 }
 
+.mic {
+  width: 1em;
+  height: 1em;
+
+  fill: none;
+  stroke: hsla(360, 50%, 0%, 1);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.listening {
+  animation: circleColors 2s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.5; }
+}
+
+@mixin eachFrame($number){
+  $percent: ($number * 1%);
+  #{$percent} {
+   @content;
+  }
+}
+
+@keyframes circleColors {
+  @for $i from 1 through 100 {
+    @include eachFrame($i) {
+      $hue: ($i * 3.6);
+      stroke: hsla($hue,50%, 50%, 1);
+    }
+  }
+}
+
 .error {
   position: absolute;
   top: 50%;

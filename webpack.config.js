@@ -42,31 +42,38 @@ module.exports = {
   module: {
     rules: [
       {
-        exclude: [/\.html$/, /\.jsx?$/, /\.s?css$/, /\.json$/, /\.yml$/],
+        exclude: [
+          /\.json$/,
+          /\.jsx?$/,
+          /\.html$/,
+          /\.(css|scss)$/,
+          /\.svg$/,
+          /\.yml$/,
+        ],
         use: {
-          loader: require.resolve('url-loader'),
+          loader: 'url-loader',
           options: {
             limit: 10000,
-            name: '[name][hash:5].[ext]',
+            name: 'media/[hash:5].[ext]',
           },
         },
       },
       {
         test: /\.json$/,
-        use: { loader: require.resolve('json-loader') },
+        use: { loader: 'json-loader' },
       },
       {
         test: /\.jsx?$/,
-        use: { loader: require.resolve('babel-loader') },
+        use: { loader: 'babel-loader' },
         exclude: /(node_modules)/,
       },
       {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
-          fallback: require.resolve('style-loader'),
+          fallback: 'style-loader',
           use: [
             {
-              loader: require.resolve('css-loader'),
+              loader: 'css-loader',
               options: {
                 modules: true,
                 camelCase: true,
@@ -74,7 +81,7 @@ module.exports = {
               },
             },
             {
-              loader: require.resolve('postcss-loader'),
+              loader: 'postcss-loader',
               options: {
                 plugins: [
                   require('autoprefixer')({
@@ -85,7 +92,7 @@ module.exports = {
               },
             },
             {
-              loader: require.resolve('sass-loader'),
+              loader: 'sass-loader',
               options: {
                 outputStyle: 'expanded',
                 includePaths: [
@@ -98,13 +105,18 @@ module.exports = {
         }),
       },
       {
+        test: /\.svg$/,
+        use: [{ loader: 'babel-loader' }, { loader: 'react-svg-loader' }],
+        exclude: /(node_modules)/,
+      },
+      {
         test: /\.yml$/,
         use: [
           {
-            loader: require.resolve('json-loader'),
+            loader: 'json-loader',
           },
           {
-            loader: require.resolve('yaml-loader'),
+            loader: 'yaml-loader',
           },
         ],
         exclude: /(node_modules)/,
@@ -124,90 +136,6 @@ module.exports = {
       template: path.join(src, 'templates', 'index.html'),
       favicon: path.join(src, 'static', 'favicon.ico'),
       filename: 'index.html',
-      formula: {
-        sets: {
-          master: {
-            dimensions: {
-              width: 980,
-              height: 250,
-              responsive: false,
-              align: '',
-            },
-            provider: 'adform',
-            inline: {
-              css: false,
-              js: false,
-            },
-            includes: ['gsap', 'jquery'],
-          },
-          slave: {
-            dimensions: {
-              width: 980,
-              height: 150,
-              responsive: false,
-              align: '',
-            },
-            sizeLimit: 150,
-            extends: 'master',
-            provider: 'adform',
-            inline: false,
-            includes: ['gsap', 'jquery'],
-          },
-          'slave-test': {
-            dimensions: {
-              width: 480,
-              height: 480,
-              responsive: false,
-            },
-            extends: 'master',
-            provider: 'adform',
-            inline: {
-              css: false,
-              js: false,
-            },
-            includes: ['gsap', 'jquery'],
-          },
-          'slave-test-2': {
-            dimensions: {
-              width: 980,
-              height: 1,
-              responsive: false,
-            },
-            provider: 'doubleclick',
-            inline: {
-              css: true,
-              js: true,
-            },
-            includes: ['gsap'],
-          },
-          yolo: {
-            dimensions: {
-              width: 1,
-              height: 1,
-              responsive: false,
-            },
-            provider: 'adform',
-            inline: {
-              styles: false,
-              scripts: false,
-            },
-            includes: ['gsap'],
-          },
-          'yolo-2': {
-            dimensions: {
-              width: 1,
-              height: 1,
-              responsive: false,
-            },
-            provider: 'adform',
-            inline: {
-              styles: false,
-              scripts: true,
-            },
-            includes: ['gsap'],
-          },
-        },
-      },
       minify: {
         removeComments: true,
         collapseWhitespace: true,

@@ -42,34 +42,47 @@ const create = (req, res) => {
     },
   };
 
-  toneAnalyzer.tone(
-    Object.assign({}, payload.input, { tones: 'emotion' }),
-    (err, response) => {
-      if (err) {
-        return res.status(err.code || 500).json(err);
-      }
-
-      const { tones } = response.document_tone.tone_categories[0];
-
-      conversation.message(payload, (err, response) => {
-        if (err) {
-          return res.status(err.code || 500).json(err);
-        }
-
-        // console.log(response);
-
-        return res.status(201).json({
-          data: {
-            id: Date.now(),
-            sender: 'bot',
-            text: response.output.text[0],
-          },
-          tones: Object.keys(tones).map(key => tones[key]),
-          context: response.context,
-        });
-      });
+  conversation.message(payload, (err, response) => {
+    if (err) {
+      return res.status(err.code || 500).json(err);
     }
-  );
+
+    return res.status(201).json({
+      data: {
+        id: Date.now(),
+        sender: 'bot',
+        text: response.output.text[0],
+      },
+      context: response.context,
+    });
+  });
+
+  // toneAnalyzer.tone(
+  //   Object.assign({}, payload.input, { tones: 'emotion' }),
+  //   (err, response) => {
+  //     if (err) {
+  //       return res.status(err.code || 500).json(err);
+  //     }
+
+  //     const { tones } = response.document_tone.tone_categories[0];
+
+  //     conversation.message(payload, (err, response) => {
+  //       if (err) {
+  //         return res.status(err.code || 500).json(err);
+  //       }
+
+  //       return res.status(201).json({
+  //         data: {
+  //           id: Date.now(),
+  //           sender: 'bot',
+  //           text: response.output.text[0],
+  //         },
+  //         tones: Object.keys(tones).map(key => tones[key]),
+  //         context: response.context,
+  //       });
+  //     });
+  //   }
+  // );
 };
 
 const destroy = (req, res) =>
