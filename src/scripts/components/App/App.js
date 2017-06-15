@@ -11,6 +11,8 @@ import styles from './app.scss';
 
 import Mic from './mic.svg';
 
+import fyfaen from 'sfx/FyFaen.m4a';
+
 import {
   sendMessage as sendMessageAction,
   clearError as clearErrorAction,
@@ -123,6 +125,8 @@ export class App extends Component {
       listening: false,
       value: '',
     };
+
+    this.music = new Audio(fyfaen);
   }
 
   /**
@@ -189,7 +193,9 @@ export class App extends Component {
     if (context.musikk !== this.props.context.musikk) {
       if (context.musikk === true) {
         console.log('PLAY MUSIC');
+        this.music.play();
       } else {
+        this.music.pause();
         console.log('STOP MUSIC');
       }
     }
